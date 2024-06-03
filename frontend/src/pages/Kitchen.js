@@ -52,7 +52,6 @@ export default function Kitchen(props) {
     setIngredients([...ingredients, ...newIngredients]);
   }
 
-  console.log("kitchen shopping list", shoppingList);
   const onServingsChange = (rowData, event) => {
     const updatedIngredients = ingredients.map((ingredient) => {
       if (ingredient.name === rowData.name) {
@@ -107,7 +106,6 @@ export default function Kitchen(props) {
   }, [selectedItem, size, servings]);
 
   function handleAddItem() {
-    console.log("selected item", selectedItem);
     let newIngredients = [];
     let ingredient;
 
@@ -125,7 +123,6 @@ export default function Kitchen(props) {
 
       newIngredients.push(ingredient);
     } else {
-      console.log("ingredients", ingredients);
       ingredients.forEach((ingr) => {
         if (ingr.name === addedIngredient.name) {
           ingr = {
@@ -138,7 +135,6 @@ export default function Kitchen(props) {
 
     setIngredients([...ingredients, ...newIngredients]);
     // const newIngredients = [...ingredients, addedIngredient];
-    console.log("newIngredients", newIngredients);
     // setIngredients(newIngredients);
     // setShoppingList(
     //   handleRecipeConversion(props.weeklySmoothies, newIngredients)

@@ -9,7 +9,6 @@ export default function Grocerylist(props) {
   const shoppingList = props.shoppingList;
   const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState([]);
-  console.log("shopping list", shoppingList);
 
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
@@ -23,13 +22,13 @@ export default function Grocerylist(props) {
     }
     setChecked(updatedList);
   };
-  console.log("checked", checked);
   function handleAddIngredientsToKitchen() {
     props.onAddGroceryItems(checked);
     let result = shoppingList.filter(
       (shoppingItem) =>
         !checked.some((checkedItem) => checkedItem.name === shoppingItem.name)
     );
+    console.log("shoppinglist", shoppingList);
 
     console.log("result", result);
   }
@@ -56,12 +55,10 @@ export default function Grocerylist(props) {
           <div>Item Name</div>
         </div>
         <ul>
-          {console.log(shoppingList)}
           {shoppingList.map((item, index) => (
             <li className={isChecked(item)} type="checkbox">
               {item.quantity} {item.item} {item.name}{" "}
               <input
-                // value={item.name}
                 onChange={(event) => handleCheck(event, item)}
                 type="checkbox"
               ></input>
