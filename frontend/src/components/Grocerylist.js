@@ -9,7 +9,9 @@ export default function Grocerylist(props) {
   const shoppingList = props.shoppingList;
   const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState([]);
+  let result;
 
+  // const result = props.handleGetRemainderGroceryList;
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
 
@@ -21,22 +23,30 @@ export default function Grocerylist(props) {
       updatedList.splice(checked.indexOf(item), 1);
     }
     setChecked(updatedList);
+    console.log("updated list", updatedList);
   };
   function handleAddIngredientsToKitchen() {
     props.onAddGroceryItems(checked);
-    let result = shoppingList.filter(
+
+    result = shoppingList.filter(
       (shoppingItem) =>
         !checked.some((checkedItem) => checkedItem.name === shoppingItem.name)
     );
-    console.log("shoppinglist", shoppingList);
 
     console.log("result", result);
+  }
+
+  function handleUpdateShopping() {
+    props.onUpdateShoppingList(result); //put data you want to pass in here
   }
 
   const footer = (
     <>
       <Button
-        onClick={handleAddIngredientsToKitchen}
+        onClick={() => {
+          handleAddIngredientsToKitchen();
+          handleUpdateShopping();
+        }}
         label="Add to My Kitchen"
         icon="pi pi-check"
       />
@@ -55,7 +65,7 @@ export default function Grocerylist(props) {
           <div>Item Name</div>
         </div>
         <ul>
-          {shoppingList.map((item, index) => (
+          {shoppingList.map((item) => (
             <li className={isChecked(item)} type="checkbox">
               {item.quantity} {item.item} {item.name}{" "}
               <input

@@ -11,6 +11,7 @@ import ingredients from "./data/ingredients.json";
 import helper from "./lib/helper.js";
 import { sendShoppingList } from "./lib/helper";
 import Checkbox from "./components/CheckboxImpl.jsx";
+import Parent from "./pages/ParentTest.jsx";
 
 const recipes = ingredients["ingredients by recipe"];
 
@@ -54,6 +55,7 @@ function App() {
           <Route index element={<Recipes {...recipeProps} />} />
           <Route path="/kitchen" element={<Kitchen {...kitchenProps} />} />
           <Route path="/checkbox" element={<Checkbox />} />
+          <Route path="/parent" element={<Parent />} />
         </Routes>
       </BrowserRouter>
     </div>

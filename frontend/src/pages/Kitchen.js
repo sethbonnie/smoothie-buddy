@@ -19,6 +19,10 @@ export default function Kitchen(props) {
   const [shoppingList, setShoppingList] = useState(
     handleRecipeConversion(props.weeklySmoothies, ingredients)
   );
+  console.log("shopping list", shoppingList);
+
+  const [result, setResult] = useState([]);
+
   function handleAddToKitchen(groceryItems) {
     let newIngredients = [];
     let ingredient;
@@ -47,9 +51,15 @@ export default function Kitchen(props) {
           }
         });
       }
+      console.log("grocery item", groceryItem);
     });
 
     setIngredients([...ingredients, ...newIngredients]);
+  }
+  function handleUpdateShopping(updatedItems) {
+    console.log("result", updatedItems);
+    setResult(updatedItems);
+    setShoppingList(result);
   }
 
   const onServingsChange = (rowData, event) => {
@@ -109,8 +119,6 @@ export default function Kitchen(props) {
     let newIngredients = [];
     let ingredient;
 
-    let item = shoppingMeasures[addedIngredient.name];
-
     let found = ingredients.find(
       (ingredient) => ingredient.name === addedIngredient.name
     );
@@ -118,7 +126,7 @@ export default function Kitchen(props) {
       ingredient = {
         name: addedIngredient.name,
         servings: addedIngredient.servings,
-        size: item.ingredient.measure,
+        size: addedIngredient.size,
       };
 
       newIngredients.push(ingredient);
@@ -134,11 +142,6 @@ export default function Kitchen(props) {
     }
 
     setIngredients([...ingredients, ...newIngredients]);
-    // const newIngredients = [...ingredients, addedIngredient];
-    // setIngredients(newIngredients);
-    // setShoppingList(
-    //   handleRecipeConversion(props.weeklySmoothies, newIngredients)
-    // );
   }
 
   return (
@@ -216,6 +219,7 @@ export default function Kitchen(props) {
       </header>
       <Grocerylist
         onAddGroceryItems={handleAddToKitchen}
+        onUpdateShoppingList={handleUpdateShopping}
         shoppingList={shoppingList}
       />
     </div>
