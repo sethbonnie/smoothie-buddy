@@ -9,6 +9,7 @@ import { Tooltip } from "primereact/tooltip";
 import "./Recipes.css";
 import { useState } from "react";
 import handleRecipeConversion from "../lib/helper";
+import { Link } from "react-router-dom";
 
 function Recipes({
   days,
@@ -47,11 +48,11 @@ function Recipes({
     </div>
   ));
 
-  function handleSubmitRecipes() {
-    // console.log(weeklySmoothies)
-    let test = handleRecipeConversion(weeklySmoothies);
-    // console.log(weeklySmoothies)
-  }
+  // function handleSubmitRecipes() {
+  //   // console.log(weeklySmoothies)
+  //   let test = handleRecipeConversion(weeklySmoothies);
+  //   // console.log(weeklySmoothies)
+  // }
 
   return (
     <div>
@@ -59,7 +60,9 @@ function Recipes({
         <Splitter style={{ height: "300px" }}>
           <div className="recipesList">{draggableMarkup}</div>
           <div>
-            <button onClick={handleSubmitRecipes}>Submit Recipes</button>
+            {/* <Link to="/kitchen">
+              <button>Submit Recipes</button>
+            </Link> */}
             {Object.keys(days).map((day) => (
               <div>
                 <h4>{day}</h4>
